@@ -525,7 +525,6 @@ CLIENT: ${userMsg}
 POOLYAI: ${aiReply}
 
 ---
-console.log('OPENAI_API_KEY' : proces.env.OPENAI_API_KEY? 'PRESENTE' : 'MANCANTE');
 Log completo disponibile in memory/aiMemory.json
     `.trim();
 
@@ -547,4 +546,5 @@ app.listen(PORT, () => {
   console.log(`🚀 Pooly\'s Mood Chat server running on http://localhost:${PORT}`);
   console.log(`📝 Memory file: ${MEMORY_FILE}`);
   console.log(`📧 Email notifications: ${process.env.SEND_EMAIL_NOTIFICATIONS === "true" ? "ON" : "OFF"}`);
+  console.log('OPENAI_API_KEY' : proces.env.OPENAI_API_KEY? 'PRESENTE' : 'MANCANTE');
 });
