@@ -8,7 +8,21 @@ const pdfParse = require('pdf-parse');
 const nodemailer = require("nodemailer");
 const rateLimit = require("express-rate-limit");
 const { v4: uuidv4 } = require("uuid");
+const { createClient } = require('@supabase/supabase-js');
 
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_ANON_KEY // O service_role se serve più potere
+);
+
+// Esempio: invece di leggere/scrivere aiMemory.json, usa Supabase
+// Crea una tabella "memory" con colonne: id, session_id, role, content, embedding (vector)
+
+// Per salvare messaggio:
+await supabase.from('memory').insert({ session_id: 'abc', role: 'user', content: 'Ciao' });
+
+// Per query con vettori (se usi RAG/memoria semantica):
+// Prima genera embedding con OpenAI, poi similarity search
 const app = express();
 const PORT = process.env.PORT || 2025;
 console.log(`Starting server.js (PORT=${PORT})`);
